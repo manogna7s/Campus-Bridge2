@@ -1,0 +1,243 @@
+/* Color Palette */
+:root {
+    --pink: #ffc8dd;
+    --peach: #ffafcc;
+    --lavender: #cdb4db;
+    --blue-light: #bde0fe;
+    --blue: #a2d2ff;
+    --white: #ffffff;
+    --text: #333;
+    --highlight: #6a4c93;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--white);
+    color: var(--text);
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 240px;
+    background-color: var(--lavender);
+    color: var(--text);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    padding-top: 2rem;
+    transition: width 0.3s ease;
+    overflow: auto;
+  }
+  
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--highlight);
+  }
+  
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar a:hover {
+    background-color: var(--blue-light);
+  }
+  
+  .sidebar a i {
+    margin-right: 12px;
+    min-width: 20px;
+  }
+  
+  .main-content {
+    margin-left: 240px;
+    padding: 2rem;
+    flex: 1;
+    background-color: var(--white);
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  header h1 {
+    font-size: 1.8rem;
+    color: var(--highlight);
+  }
+  
+  section {
+    margin-bottom: 2rem;
+  }
+  
+  .card {
+    background-color: var(--blue-light);
+    border-left: 6px solid var(--highlight);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.6s ease;
+  }
+  
+  .card h3 {
+    margin: 0;
+    color: var(--highlight);
+  }
+  
+  .card p {
+    margin: 0.5rem 0 0;
+  }
+  
+  .logout-btn {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 70px;
+    }
+  
+    .sidebar a span {
+      display: none;
+    }
+  
+    .main-content {
+      margin-left: 70px;
+    }
+  
+    .sidebar h2 {
+      font-size: 1rem;
+    }
+  }
+  /* Additional styles for charts and card layout */
+.card {
+    background-color: var(--blue-light);
+    border-left: 6px solid var(--highlight);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.6s ease;
+}
+
+.card h3 {
+    margin: 0;
+    color: var(--highlight);
+    font-size: 1.5rem;
+}
+
+canvas {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+/* Exam table styles */
+.exam-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.exam-table th, .exam-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.exam-table th {
+    background-color: var(--blue-light);
+    color: var(--highlight);
+}
+
+.exam-table td {
+    background-color: var(--white);
+}
+
+/* Card layout for exam performance chart */
+.card {
+    background-color: var(--blue-light);
+    border-left: 6px solid var(--highlight);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.6s ease;
+}
+
+.card h3 {
+    margin: 0;
+    color: var(--highlight);
+    font-size: 1.5rem;
+}
+
+canvas {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+/* Timetable table styles */
+.timetable-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.timetable-table th, .timetable-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.timetable-table th {
+    background-color: var(--blue-light);
+    color: var(--highlight);
+}
+
+.timetable-table td {
+    background-color: var(--white);
+}
+
+/* Card layout for subject study hours chart */
+.card {
+    background-color: var(--blue-light);
+    border-left: 6px solid var(--highlight);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.6s ease;
+}
+
+.card h3 {
+    margin: 0;
+    color: var(--highlight);
+    font-size: 1.5rem;
+}
+
+canvas {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}

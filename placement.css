@@ -1,0 +1,138 @@
+
+:root {
+--lavender: #cdb4db;
+--blue: #a2d2ff;
+--peach: #ffafcc;
+--white: #ffffff;
+--highlight: #6a4c93;
+--shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+margin: 0;
+font-family: 'Segoe UI', sans-serif;
+background-color: var(--white);
+color: #333;
+}
+
+.placement-container {
+padding: 2rem;
+max-width: 1200px;
+margin: auto;
+}
+
+header {
+text-align: center;
+margin-bottom: 2rem;
+}
+header h1 {
+    font-size: 2.5rem;
+    color: var(--highlight);
+  }
+  
+  .hero-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-card {
+    text-align: center;
+    width: 30%;
+  }
+  
+  .hero-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+  .metrics {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .card {
+    background-color: var(--blue);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow);
+    flex: 1;
+  }
+  
+  .card h2 {
+    color: var(--highlight);
+  }
+  
+  .card ol {
+    padding-left: 1.2rem;
+    margin-top: 1rem;
+  }
+  
+  .mock-schedule {
+    background-color: var(--peach);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+  
+  .mock-schedule h2 {
+    margin-bottom: 1rem;
+    color: var(--highlight);
+  }
+  
+  .mock-schedule ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .mock-schedule li {
+    margin-bottom: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .export-section {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .export-btn {
+    background-color: var(--highlight);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .testimonials {
+    background-color: var(--lavender);
+    padding: 2rem;
+    border-radius: 10px;
+  }
+  
+  .testimonials h2 {
+    color: var(--highlight);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonial-card {
+    background-color: var(--white);
+    border-left: 6px solid var(--highlight);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  
+  .testimonial-card .by {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #666;
+  }
+ 

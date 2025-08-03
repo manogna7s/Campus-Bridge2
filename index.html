@@ -9,9 +9,14 @@
 
 
 <link rel="stylesheet" href="styles.css">
+<<<<<<< HEAD
+<header class="hero"> 
+<body>
+=======
 <header class="hero">
 <body>
   
+>>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84
     <a href="#" class="logo-wrapper">
     <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744446605/logo_fopxgl.svg" 
          alt="Campus Bridge Logo" class="logo" />
@@ -44,10 +49,17 @@
  <section class="dashboard-section">
   <h2 class="section-title">Explore Your Campus Tools</h2>
   <div class="card-grid">
+<<<<<<< HEAD
+    <!-- <div class="dashboard-card" onclick="window.location.href='courses.html'">
+      <div class="card-caption">Academic LMS Hub</div>
+      <img src="https://i.ibb.co/MD7t9rg6/CE-3.jpg" alt="Academic LMS" />
+    </div> -->
+=======
     <div class="dashboard-card" onclick="window.location.href='courses.html'">
       <div class="card-caption">Academic LMS Hub</div>
       <img src="https://i.ibb.co/MD7t9rg6/CE-3.jpg" alt="Academic LMS" />
     </div>
+>>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84
 
     <div class="dashboard-card" onclick="window.location.href='codelab.html'">
       <div class="card-caption">Codelab Arena</div>
@@ -59,11 +71,19 @@
       <img src="https://i.ibb.co/7wcryxn/hostel3.jpg" alt="Placement Panel" />
     </div>
 
+<<<<<<< HEAD
+    <!-- <div class="dashboard-card" onclick="window.location.href='faculty.html'">
+      <div class="card-caption">Faculty</div>
+      <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744481991/Banner1-13_uxddjb.jpg" alt="Announcements" />
+    </div>
+  </div> -->
+=======
     <div class="dashboard-card" onclick="window.location.href='faculty.html'">
       <div class="card-caption">Faculty</div>
       <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744481991/Banner1-13_uxddjb.jpg" alt="Announcements" />
     </div>
   </div>
+>>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84
 </section>
 
 
@@ -128,6 +148,97 @@
 
 
 <script>
+<<<<<<< HEAD
+  function toggleMenu() {
+    const menu = document.getElementById("profileDropdown");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+
+  // Close menu on outside click
+  window.addEventListener("click", function (e) {
+    if (!e.target.closest(".profile-menu")) {
+      document.getElementById("profileDropdown").style.display = "none";
+    }
+  });
+
+  const chatLog = document.getElementById("chat-log");
+  const inputBox = document.getElementById("user-input");
+  const toggleBtn = document.getElementById("shakti-toggle");
+  const chatBox = document.getElementById("shakti-chat");
+
+  // Show welcome message and options
+  function showWelcome() {
+    appendMessage("Shakti", `🌼 Welcome! Please type a number to choose an option:<br>
+    1. View Leaderboard<br>
+    2. Open Compiler<br>
+    3. Fee Payment Info<br>
+    4. What is Campus Bridge?<br>
+    5. Say Hello<br>
+    6. Who made you?<br>
+    7. Exit Chat`);
+  }
+
+  // Command-based logic using switch-case
+  function getResponse(input) {
+    switch (input) {
+      case "1":
+        return "🏆 You're climbing the leaderboard! You're currently in the top 5%.";
+      case "2":
+        return "💻 Click on the 'Compiler' tab above to code instantly.";
+      case "3":
+        return "🏦 You can pay your fee at the University Office.";
+      case "4":
+        return "🌉 Campus Bridge connects you with campus-specific challenges and leaderboard events.";
+      case "5":
+        return "👋 Hey, I'm Shakti AI! Ready to help you on your Campus journey!";
+      case "6":
+        return "🤖 I was built by CodeUnia — Best company for innovation!";
+      case "7":
+        return "👋 Bye! Reload the page to chat again.";
+      default:
+        return "❓ Sorry, I didn't get that. Please enter a number between 1–7.";
+    }
+  }
+
+  inputBox.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      const userInput = inputBox.value.trim();
+      appendMessage("You", userInput);
+      const reply = getResponse(userInput);
+      appendMessage("Shakti", reply);
+      inputBox.value = "";
+
+      if (userInput !== "7") {
+        setTimeout(showWelcome, 1000); // Re-show options after each response unless exiting
+      }
+    }
+  });
+
+  toggleBtn.addEventListener("click", () => {
+    const isVisible = chatBox.style.display === "flex";
+    chatBox.style.display = isVisible ? "none" : "flex";
+    if (!isVisible) {
+      setTimeout(showWelcome, 500); // Show menu when chat is opened
+    }
+  });
+
+  function appendMessage(sender, text) {
+    chatLog.innerHTML += `<div><strong>${sender}:</strong> ${text}</div>`;
+    chatLog.scrollTop = chatLog.scrollHeight;
+    localStorage.setItem("chat", chatLog.innerHTML);
+  }
+
+  window.addEventListener("load", () => {
+    chatLog.innerHTML = localStorage.getItem("chat") || "";
+    showWelcome(); // Show options on load
+  });
+</script>
+
+</header>
+</body>
+  
+
+=======
   function toggleMenu() {
     const menu = document.getElementById("profileDropdown");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
@@ -185,3 +296,4 @@ window.addEventListener("load", () => {
 </body>
   
 </header>
+>>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84

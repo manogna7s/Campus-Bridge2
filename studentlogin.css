@@ -1,0 +1,98 @@
+
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fce4ec, #d1e3ff); /* Soft pink to CB blue */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-wrapper {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 2.7rem;
+    border-radius: 25px;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .logo {
+    width: 130px;
+    margin-bottom: 25px;
+    transition: transform 0.2s ease;
+  }
+  
+  .logo:hover {
+    transform: scale(1.05);
+  }
+  
+  h2 {
+    color: #c2185b; /* Deep pink headline */
+    margin-bottom: 0.3rem;
+    font-size: 1.9rem;
+  }
+  
+  .subtitle {
+    color: #5c6bc0;
+    font-size: 0.95rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  input {
+    width: 90%;
+    padding: 1rem;
+    margin: 0.6rem 0;
+    border: 1px solid #f8bbd0;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #fce4ec;
+    transition: border 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #ec407a;
+    outline: none;
+  }
+  
+  button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(to right, #ec407a, #7e57c2); /* Pink to CB Blue */
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 1.2rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    transform: scale(1.02);
+    background: linear-gradient(to right, #d81b60, #5c6bc0);
+  }
+  
+  .links {
+    margin-top: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  
+  .links a {
+    color: #ec407a;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .links a:hover {
+    color: #ad1457;
+  }
+  

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="common.css" />
+  <title>Campus Bridge LMS</title>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <h2>Campus Bridge</h2>
+    <ul>
+      <li><a href="javascript:void(0)" onclick="showSection('courses')"><i class="fa fa-book"></i>Courses</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('lectures')"><i class="fa fa-chalkboard-teacher"></i>Lectures</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('assignments')"><i class="fa fa-pencil-alt"></i>Assignments</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('attendance')"><i class="fa fa-users"></i>Attendance</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('exams')"><i class="fa fa-clipboard"></i>Exams</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('timetable')"><i class="fa fa-calendar"></i>Timetable</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('reports')"><i class="fa fa-chart-bar"></i>Reports</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('logout')"><i class="fa fa-sign-out-alt"></i>Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Courses Section -->
+    <section id="courses" class="content-section">
+      <h2>Courses</h2>
+      <div class="card">
+        <h3>Course 1: Web Development</h3>
+        <p>Details about this course...</p>
+      </div>
+      <div class="card">
+        <h3>Course 2: Data Structures</h3>
+        <p>Details about this course...</p>
+      </div>
+      <!-- More course cards can go here -->
+    </section>
+
+    <!-- Lectures Section -->
+    <section id="lectures" class="content-section">
+      <h2>Lectures</h2>
+      <div class="card">
+        <h3>Lecture 1: HTML Basics</h3>
+        <p>Content for this lecture...</p>
+      </div>
+      <!-- Add more lectures here -->
+    </section>
+
+    <!-- Assignments Section -->
+    <section id="assignments" class="content-section">
+      <h2>Assignments</h2>
+      <div class="card">
+        <h3>Assignment 1: JavaScript Functions</h3>
+        <p>Details about the assignment...</p>
+      </div>
+      <!-- Add more assignments here -->
+    </section>
+
+    <!-- Attendance Section -->
+    <section id="attendance" class="content-section">
+      <h2>Attendance</h2>
+      <div class="card">
+        <h3>Attendance Status</h3>
+        <p>Your current attendance...</p>
+      </div>
+    </section>
+
+    <!-- Exams Section -->
+    <section id="exams" class="content-section">
+      <h2>Exams</h2>
+      <div class="exam-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Exam Date</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Web Development</td>
+              <td>12th May 2025</td>
+              <td>2 hours</td>
+            </tr>
+            <!-- Add more exam rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Timetable Section -->
+    <section id="timetable" class="content-section">
+      <h2>Timetable</h2>
+      <div class="timetable-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Subject</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday</td>
+              <td>Web Development</td>
+              <td>10:00 AM</td>
+            </tr>
+            <!-- More timetable rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="reports" class="content-section">
+      <h2>Reports</h2>
+      <div class="card">
+        <h3>Performance Overview</h3>
+        <canvas id="performanceChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Logout Section -->
+    <section id="logout" class="content-section">
+      <h2>Logout</h2>
+      <p>You have been logged out. See you again!</p>
+    </section>
+  </div>
+
+  <!-- JS for Dynamic Section Switching -->
+  <script src="dashboard.js"></script>
+</body>
+</html>
