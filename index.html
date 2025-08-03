@@ -9,14 +9,13 @@
 
 
 <link rel="stylesheet" href="styles.css">
-<<<<<<< HEAD
+
 <header class="hero"> 
 <body>
-=======
+
 <header class="hero">
 <body>
   
->>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84
     <a href="#" class="logo-wrapper">
     <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744446605/logo_fopxgl.svg" 
          alt="Campus Bridge Logo" class="logo" />
@@ -49,17 +48,12 @@
  <section class="dashboard-section">
   <h2 class="section-title">Explore Your Campus Tools</h2>
   <div class="card-grid">
-<<<<<<< HEAD
-    <!-- <div class="dashboard-card" onclick="window.location.href='courses.html'">
+
+  <!-- <div class="dashboard-card" onclick="window.location.href='courses.html'">
       <div class="card-caption">Academic LMS Hub</div>
       <img src="https://i.ibb.co/MD7t9rg6/CE-3.jpg" alt="Academic LMS" />
-    </div> -->
-=======
-    <div class="dashboard-card" onclick="window.location.href='courses.html'">
-      <div class="card-caption">Academic LMS Hub</div>
-      <img src="https://i.ibb.co/MD7t9rg6/CE-3.jpg" alt="Academic LMS" />
-    </div>
->>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84
+    </div> 
+    -->
 
     <div class="dashboard-card" onclick="window.location.href='codelab.html'">
       <div class="card-caption">Codelab Arena</div>
@@ -71,19 +65,13 @@
       <img src="https://i.ibb.co/7wcryxn/hostel3.jpg" alt="Placement Panel" />
     </div>
 
-<<<<<<< HEAD
+
     <!-- <div class="dashboard-card" onclick="window.location.href='faculty.html'">
       <div class="card-caption">Faculty</div>
       <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744481991/Banner1-13_uxddjb.jpg" alt="Announcements" />
     </div>
   </div> -->
-=======
-    <div class="dashboard-card" onclick="window.location.href='faculty.html'">
-      <div class="card-caption">Faculty</div>
-      <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744481991/Banner1-13_uxddjb.jpg" alt="Announcements" />
-    </div>
-  </div>
->>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84
+
 </section>
 
 
@@ -237,63 +225,3 @@
 </header>
 </body>
   
-
-=======
-  function toggleMenu() {
-    const menu = document.getElementById("profileDropdown");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  }
-
-  // Close menu on outside click
-  window.addEventListener("click", function (e) {
-    if (!e.target.closest(".profile-menu")) {
-      document.getElementById("profileDropdown").style.display = "none";
-    }
-  });
-
-const chatLog = document.getElementById("chat-log");
-const inputBox = document.getElementById("user-input");
-const toggleBtn = document.getElementById("shakti-toggle");
-const chatBox = document.getElementById("shakti-chat");
-
-const responses = {
-  "hello": "Hey, I'm Shakti AI! 🌸 Ready to help you on Campus Bridge.",
-  "hi": "Hey, I'm Shakti AI! 🌸 Ready to help you on Codelab Arena.",
-  "how are you": "AWESOME! how are you?",
-  "stupid": "You are!!",
-  "mohan babu university": "Best University in AP",
-  "compiler": "Click on the 'Compiler' tab above to code instantly.",
-  "leaderboard": "You're climbing the leaderboard! You're currently in the top 5%.",
-  "where can i pay the fee?": "University Office",
-  "campus bridge": "Campus Bridge connects you with campus-specific challenges and leaderboard events.",
-};
-
-inputBox.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    const userInput = inputBox.value.toLowerCase().trim();
-    appendMessage("You", userInput);
-    const reply = responses[userInput] || "I'm still learning! Try asking something else 🌼";
-    appendMessage("Shakti", reply);
-    inputBox.value = "";
-  }
-});
-
-toggleBtn.addEventListener("click", () => {
-  chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
-});
-
-function appendMessage(sender, text) {
-  chatLog.innerHTML += `<div><strong>${sender}:</strong> ${text}</div>`;
-  chatLog.scrollTop = chatLog.scrollHeight;
-  localStorage.setItem("chat", chatLog.innerHTML);
-}
-
-window.addEventListener("load", () => {
-  chatLog.innerHTML = localStorage.getItem("chat") || "";
-});
-</script>
-
-</body>
-  
-</header>
->>>>>>> e46c473d7175931ea3f4ea61d7a1ae14d3081d84
