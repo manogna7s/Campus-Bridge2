@@ -6,22 +6,18 @@
   <meta name="keywords" content="HTML, CSS, JavaScript" />
   <meta name="author" content="John Doe" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-
-<link rel="stylesheet" href="styles.css">
-
-<header class="hero"> 
 <body>
 
 <header class="hero">
-<body>
-  
-    <a href="#" class="logo-wrapper">
+ <a href="#" class="logo-wrapper">
     <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744446605/logo_fopxgl.svg" 
          alt="Campus Bridge Logo" class="logo" />
   </a>
 
-<!-- Student Profile Icon Top Right -->
+<!-- Student Profile Icon Top Right 
 <div class="profile-menu">
  <button class="profile-icon" onclick="toggleMenu()">
     <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile" />
@@ -32,7 +28,7 @@
     <li><a href="#">Help</a></li>
     <li><a href="#">Logout</a></li>
   </ul>
-</div>
+</div> -->
 
  <section class="hero">
   <div class="hero-content">
@@ -42,8 +38,8 @@
       <a href="studentlogin.html" class="btn white  gradient-btn outline-btn">Explore as a Student</a>
       <a href="mentorlogin.html" class="btn dark gradient-btn2">Explore as a Faculty</a>
     </div>
-    </section>
-   </div>
+  </div>
+  </section>
  <!-- Dashboard Section -->
  <section class="dashboard-section">
   <h2 class="section-title">Explore Your Campus Tools</h2>
@@ -121,7 +117,6 @@
   </div>
 </section>
 
-</section>
 <!-- Shakti AI Button -->
 <div id="shakti-toggle">
   <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744485469/download_iigdmt.jpg" alt="Shakti AI">
@@ -134,94 +129,68 @@
   <input type="text" id="user-input" placeholder="Ask me anything..." />
 </div>
 
-
 <script>
-<<<<<<< HEAD
-  function toggleMenu() {
-    const menu = document.getElementById("profileDropdown");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  }
+const chatBox = document.getElementById("shakti-chat");
+    const toggleButton = document.getElementById("shakti-toggle");
+    const chatLog = document.getElementById("chat-log");
+    const inputBox = document.getElementById("user-input");
 
-  // Close menu on outside click
-  window.addEventListener("click", function (e) {
-    if (!e.target.closest(".profile-menu")) {
-      document.getElementById("profileDropdown").style.display = "none";
+    function appendMessage(sender, message) {
+      const messageElem = document.createElement("div");
+      messageElem.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      chatLog.appendChild(messageElem);
+      chatLog.scrollTop = chatLog.scrollHeight;
     }
-  });
 
-  const chatLog = document.getElementById("chat-log");
-  const inputBox = document.getElementById("user-input");
-  const toggleBtn = document.getElementById("shakti-toggle");
-  const chatBox = document.getElementById("shakti-chat");
-
-  // Show welcome message and options
-  function showWelcome() {
-    appendMessage("Shakti", `🌼 Welcome! Please type a number to choose an option:<br>
-    1. View Leaderboard<br>
-    2. Open Compiler<br>
-    3. Fee Payment Info<br>
-    4. What is Campus Bridge?<br>
-    5. Say Hello<br>
-    6. Who made you?<br>
-    7. Exit Chat`);
-  }
-
-  // Command-based logic using switch-case
-  function getResponse(input) {
-    switch (input) {
-      case "1":
-        return "🏆 You're climbing the leaderboard! You're currently in the top 5%.";
-      case "2":
-        return "💻 Click on the 'Compiler' tab above to code instantly.";
-      case "3":
-        return "🏦 You can pay your fee at the University Office.";
-      case "4":
-        return "🌉 Campus Bridge connects you with campus-specific challenges and leaderboard events.";
-      case "5":
-        return "👋 Hey, I'm Shakti AI! Ready to help you on your Campus journey!";
-      case "6":
-        return "🤖 I was built by CodeUnia — Best company for innovation!";
-      case "7":
-        return "👋 Bye! Reload the page to chat again.";
-      default:
-        return "❓ Sorry, I didn't get that. Please enter a number between 1–7.";
+    function showWelcome() {
+      appendMessage("Shakti", `🌸 Welcome! Please type a number to choose an option:<br>
+        1. View Leaderboard<br>
+        2. Open Compiler<br>
+        3. Fee Payment Info<br>
+        4. What is Campus Bridge?<br>
+        5. Say Hello<br>
+        6. Who made you?<br>
+        7. Exit Chat`);
     }
-  }
 
-  inputBox.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      const userInput = inputBox.value.trim();
-      appendMessage("You", userInput);
-      const reply = getResponse(userInput);
-      appendMessage("Shakti", reply);
-      inputBox.value = "";
-
-      if (userInput !== "7") {
-        setTimeout(showWelcome, 1000); // Re-show options after each response unless exiting
+    function getResponse(input) {
+      switch (input) {
+        case "1": return "Here's the leaderboard: [Leaderboard link]";
+        case "2": return "Opening Compiler: [Compiler link]";
+        case "3": return "You can pay your fee at [Payment Portal]";
+        case "4": return "Campus Bridge is a platform for students to learn, compete, and grow.";
+        case "5": return "Hello there! How can I assist you today?";
+        case "6": return "I was created by the Campus Bridge team using HTML, CSS, and JavaScript.";
+        case "7": return "Goodbye! 👋";
+        default: return "Please enter a valid number from 1 to 7.";
       }
     }
-  });
 
-  toggleBtn.addEventListener("click", () => {
-    const isVisible = chatBox.style.display === "flex";
-    chatBox.style.display = isVisible ? "none" : "flex";
-    if (!isVisible) {
-      setTimeout(showWelcome, 500); // Show menu when chat is opened
-    }
-  });
+    toggleButton.addEventListener("click", function () {
+      if (chatBox.style.display === "none") {
+        chatBox.style.display = "flex";
+        chatLog.innerHTML = "";
+        showWelcome();
+      } else {
+        chatBox.style.display = "none";
+      }
+    });
 
-  function appendMessage(sender, text) {
-    chatLog.innerHTML += `<div><strong>${sender}:</strong> ${text}</div>`;
-    chatLog.scrollTop = chatLog.scrollHeight;
-    localStorage.setItem("chat", chatLog.innerHTML);
-  }
+    inputBox.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        const userInput = inputBox.value.trim();
+        if (!userInput) return;
 
-  window.addEventListener("load", () => {
-    chatLog.innerHTML = localStorage.getItem("chat") || "";
-    showWelcome(); // Show options on load
-  });
+        appendMessage("You", userInput);
+        const reply = getResponse(userInput);
+        appendMessage("Shakti", reply);
+        inputBox.value = "";
+
+        if (userInput === "7") {
+          chatBox.style.display = "none";
+        }
+      }
+    });
 </script>
-
-</header>
 </body>
-  
+</html>
