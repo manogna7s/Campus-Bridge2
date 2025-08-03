@@ -1,0 +1,172 @@
+/* Reset margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Basic Body Styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    display: flex;
+  }
+  
+  /* Sidebar Styling */
+  .sidebar {
+    background-color: #cdb4db;
+    color: #fff;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    transition: all 0.3s;
+  }
+  
+  .sidebar.collapsed {
+    width: 60px;
+  }
+  
+  .sidebar .logo-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .sidebar .logo {
+    max-width: 100px;
+  }
+  
+  .sidebar .hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  .nav-links {
+    list-style: none;
+    margin-top: 40px;
+  }
+  
+  .nav-links li {
+    margin: 15px 0;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links a:hover {
+    color: #ffafcc;
+  }
+  
+  .nav-links a i {
+    margin-right: 10px;
+  }
+  
+  /* Main Content Styling */
+  .dashboard {
+    margin-left: 130px; /* Adjusting space for the sidebar */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ensuring the content doesn't overflow the screen */
+    display: flex; /* Aligning the content horizontally */
+    flex-wrap: wrap; /* Allowing content to wrap if needed */
+    justify-content: flex-start; /* Aligning content to the left */
+  }
+  
+  /* Welcome Section */
+  .welcome {
+    background-color: #bde0fe;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 100%; /* Taking full width */
+  }
+  
+  .welcome h1 {
+    color: #333;
+  }
+  
+  .welcome .username {
+    font-weight: bold;
+    font-style: italic;
+    font-family: sans-serif;
+    color: #2ab4da;
+  }
+  
+  .welcome .tagline {
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  /* Highlight Section */
+  .highlight {
+    display: flex;
+    gap: 10px; /* Reduced gap between cards */
+    margin-top: 20px;
+    justify-content: flex-start; /* Align the items to the left of the page */
+  }
+  
+  .highlight-box {
+    background-color: #ffc8dd;
+    padding: 20px;
+    border-radius: 10px;
+    width: 230px; /* Reduced width for more space */
+    transition: transform 0.3s;
+  }
+  
+  .highlight-box:hover {
+    transform: scale(1.05);
+  }
+  
+  .icon {
+    font-size: 30px;
+    color: #ffafcc;
+    margin-bottom: 10px;
+  }
+  
+  .highlight-box h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .highlight-box p {
+    color: #555;
+    font-size: 0.9em;
+  }
+  
+  /* Sidebar and content layout */
+  .dashboard {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px; /* Reduced space between sidebar and content */
+  }
+  
+  /* Responsive Layout */
+  @media screen and (max-width: 768px) {
+    .dashboard {
+      margin-left: 60px; /* Adjusting space when sidebar is collapsed */
+    }
+  
+    .sidebar.collapsed {
+      width: 60px;
+    }
+  
+    .highlight {
+      flex-direction: column;
+    }
+  
+    .highlight-box {
+      max-width: none;
+      width: 100%;
+    }
+  }
