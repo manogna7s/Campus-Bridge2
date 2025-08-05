@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Free Web tutorials" />
+  <meta name="keywords" content="HTML, CSS, JavaScript" />
+  <meta name="author" content="John Doe" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="hero">
+ <a href="#" class="logo-wrapper">
+    <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744446605/logo_fopxgl.svg" 
+         alt="Campus Bridge Logo" class="logo" />
+  </a>
+
+<!-- Student Profile Icon Top Right 
+<div class="profile-menu">
+ <button class="profile-icon" onclick="toggleMenu()">
+    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile" />
+  </button>
+  <ul class="dropdown" id="profileDropdown">
+    <li><a href="#">Profile</a></li>
+    <li><a href="#">Settings</a></li>
+    <li><a href="#">Help</a></li>
+    <li><a href="#">Logout</a></li>
+  </ul>
+</div> -->
+
+ <section class="hero">
+  <div class="hero-content">
+    <h1>“Campus Bridge is the academic & coding revolution I needed.”</h1>
+    <p class="quote-source">— Every ambitious student, ever</p>
+    <div class="download-buttons">
+      <a href="studentlogin.html" class="btn white  gradient-btn outline-btn">Explore as a Student</a>
+     <!-- <a href="mentorlogin.html" class="btn dark gradient-btn2">Explore as a Faculty</a>-->
+    </div>
+  </div>
+  </section>
+ <!-- Dashboard Section -->
+ <section class="dashboard-section">
+  <h2 class="section-title">Explore Your Campus Tools</h2>
+  <div class="card-grid">
+
+  <!-- <div class="dashboard-card" onclick="window.location.href='courses.html'">
+      <div class="card-caption">Academic LMS Hub</div>
+      <img src="https://i.ibb.co/MD7t9rg6/CE-3.jpg" alt="Academic LMS" />
+    </div> 
+    -->
+
+    <div class="dashboard-card" onclick="window.location.href='freecourses.html'">
+      <div class="card-caption">Free Courses</div>
+      <img src="https://i.ibb.co/Z6m0Q80K/4-1.jpg" alt="Codelab Arena" />
+    </div>
+
+    <div class="dashboard-card" onclick="window.location.href='placement.html'">
+      <div class="card-caption">Placement Panel</div>
+      <img src="https://i.ibb.co/7wcryxn/hostel3.jpg" alt="Placement Panel" />
+    </div>
+
+
+    <!-- <div class="dashboard-card" onclick="window.location.href='faculty.html'">
+      <div class="card-caption">Faculty</div>
+      <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744481991/Banner1-13_uxddjb.jpg" alt="Announcements" />
+    </div>
+  </div> -->
+
+</section>
+
+
+<div class="highlight-section">
+  <div class="highlight-container">
+    <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744448430/images_dox58p.jpg" alt="Student 1" />
+    <div class="highlight-text">
+      <p class="quote">“Campus Bridge gave me access to everything in one place. It’s my daily launchpad.”</p>
+      <p class="handle">@ananya_2002</p>
+    </div>
+  </div>
+
+  <div class="highlight-container">
+    <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744454951/istockphoto-1473711199-612x612_uldutl.jpg" alt="Student 2" />
+    <div class="highlight-text">
+      <p class="quote">“Before Campus Bridge, I was lost in tabs. Now my academic life is organized and easy.”</p>
+      <p class="handle">@vikas_rdy</p>
+    </div>
+  </div>
+
+  <div class="highlight-container">
+    <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744454949/istockphoto-511353109-612x612_qqfihh.jpg" alt="Student 3" />
+    <div class="highlight-text">
+      <p class="quote">“Campus Bridge is more than a portal—it's my assistant, my planner, my lifesaver.”</p>
+      <p class="handle">@meghana.codes</p>
+    </div>
+  </div>
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <p>Whether you’re a student, mentor, or recruiter — we’d love to hear from you. Let’s build the bridge together.</p>
+      <ul>
+        <li><strong>Email:</strong> connect@campusbridge.io</li>
+        <li><strong>Phone:</strong> +91 98765 43210</li>
+        <li><strong>Address:</strong> #301, Tech Towers, Hyderabad, India</li>
+      </ul>
+    </div>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- Shakti AI Button -->
+<div id="shakti-toggle">
+  <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744485469/download_iigdmt.jpg" alt="Shakti AI">
+</div>
+
+<!-- Shakti AI Chat Widget -->
+<div id="shakti-chat">
+  <div id="shakti-header">💬 Shakti AI</div>
+  <div id="chat-log"></div>
+  <input type="text" id="user-input" placeholder="Ask me anything..." />
+</div>
+
+<script>
+const chatBox = document.getElementById("shakti-chat");
+    const toggleButton = document.getElementById("shakti-toggle");
+    const chatLog = document.getElementById("chat-log");
+    const inputBox = document.getElementById("user-input");
+
+    function appendMessage(sender, message) {
+      const messageElem = document.createElement("div");
+      messageElem.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      chatLog.appendChild(messageElem);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function showWelcome() {
+      appendMessage("Shakti", `🌸 Welcome! Please type a number to choose an option:<br>
+        1. Who is top in Leaderboard currently?<br>
+        2. How can I contact the administration office?<br>
+        3. Fee Payment Info<br>
+        4. What is Campus Bridge?<br>
+        5. Say Hello<br>
+        6. Who made you?<br>
+        7. Exit Chat`);
+    }
+
+    function getResponse(input) {
+      switch (input) {
+        case "1": return "It is Riya Jain";
+        case "2": return "Sure, mail to campusbridge@yahoo.com";
+        case "3": return "You can pay your fee at University Office";
+        case "4": return "Campus Bridge is a platform for students to learn, compete, and grow.";
+        case "5": return "Hello there! How can I assist you today?";
+        case "6": return "I was created by the Campus Bridge team.";
+        case "7": return "Goodbye! 👋";
+        default: return "Please enter a valid number from 1 to 7.";
+      }
+    }
+
+    toggleButton.addEventListener("click", function () {
+      if (chatBox.style.display === "none") {
+        chatBox.style.display = "flex";
+        chatLog.innerHTML = "";
+        showWelcome();
+      } else {
+        chatBox.style.display = "none";
+      }
+    });
+
+    inputBox.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        const userInput = inputBox.value.trim();
+        if (!userInput) return;
+
+        appendMessage("You", userInput);
+        const reply = getResponse(userInput);
+        appendMessage("Shakti", reply);
+        inputBox.value = "";
+
+        if (userInput === "7") {
+          chatBox.style.display = "none";
+        }
+      }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Courses | Campus Bridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="free-courses.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+ 
+</head>
+<body>
+  <header>
+    <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744446605/logo_fopxgl.svg" alt="Campus Bridge Logo" class="logo">
+  </header>
+
+  <h1 class="freec">Free Courses</h1>
+  <section class="course-grid">
+
+    <div class="course-card" onclick="showVideos('dsa')">
+      <h2>DSA</h2>
+      <p>Master Data Structures & Algorithms with top YouTube content.</p>
+    </div>
+    <div class="course-card" onclick="showVideos('cpp')">
+      <h2>C++</h2>
+      <p>Build strong C++ concepts from beginner to advanced.</p>
+    </div>
+    <div class="course-card" onclick="showVideos('python')">
+      <h2>Python</h2>
+      <p>Learn Python with real-world projects and guided tutorials.</p>
+    </div>
+    <div class="course-card" onclick="showVideos('web')">
+      <h2>HTML & CSS</h2>
+      <p>Design beautiful websites using HTML and modern CSS.</p>
+    </div>
+  </section>
+
+  <section class="videos" id="video-section" style="display: none;">
+    <h2>Course Videos</h2>
+    <div id="videos-container"></div>
+  </section>
+
+  <script>
+    const videoData = {
+      dsa: [
+        {
+          title: "What is DSA?",
+          link: "https://www.youtube.com/embed/92vuuZt7wak",
+          description: "Introduction to DSA and why it's important for tech interviews."
+        },
+        {
+          title: "Array Basics",
+          link: "https://www.youtube.com/embed/cbSrsYiRamo",
+          description: "Learn how arrays work and how to use them effectively."
+        }
+      ],
+      cpp: [
+        {
+          title: "C++ Basics",
+          link: "https://www.youtube.com/embed/ZzaPdXTrSb8",
+          description: "Start learning C++ from scratch in this beginner-friendly video."
+        },
+        {
+          title: "C++ OOPs",
+          link: "https://www.youtube.com/embed/pTB0EiLXUC8",
+          description: "Understand Object Oriented Programming in C++."
+        }
+      ],
+      python: [
+        {
+          title: "Python in One Video",
+          link: "https://www.youtube.com/embed/_uQrJ0TkZlc",
+          description: "A crash course covering Python fundamentals."
+        },
+        {
+          title: "Python Projects",
+          link: "https://www.youtube.com/embed/8ext9G7xspg",
+          description: "Build real world Python projects."
+        }
+      ],
+      web: [
+        {
+          title: "HTML Full Course",
+          link: "https://www.youtube.com/embed/pQN-pnXPaVg",
+          description: "Learn HTML from basics to advanced."
+        },
+        {
+          title: "CSS Crash Course",
+          link: "https://www.youtube.com/embed/yfoY53QXEnI",
+          description: "Understand CSS styling, layout and more."
+        }
+      ]
+    };
+
+    function showVideos(course) {
+  const container = document.getElementById("videos-container");
+  const videoSection = document.getElementById("video-section");
+  container.innerHTML = "";
+  videoSection.style.display = "block"; // Show the video section
+  videoData[course].forEach(video => {
+    container.innerHTML += `
+      <div class="video-card">
+        <h3>${video.title}</h3>
+        <iframe src="${video.link}" allowfullscreen></iframe>
+        <p>${video.description}</p>
+      </div>
+    `;
+  });
+}
+
+  </script>
+</body>
+</html>
