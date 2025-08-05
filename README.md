@@ -4,7 +4,7 @@
 Campus Bridge is a modern and lightweight LMS (Learning Management System) tailored for educational institutions, students, and self-paced learners. Built with simplicity, scalability, and beauty in mind.
 
 <p align="center">
-  <img src="logo_fopxgl.svg" alt="Campus Bridge Logo" width="120"/>
+  <img src="logo.png" alt="Campus Bridge Logo" height="210" width="120"/>
 </p>
 
 ---
