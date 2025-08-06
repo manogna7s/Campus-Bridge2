@@ -11,7 +11,7 @@ Campus Bridge is a modern and lightweight LMS (Learning Management System) tailo
 
 ## 🚀 Live Demo
 
-🌐 [Live Deployment Coming Soon](https://campus-bridge-five.vercel.app/)
+🌐 [Demo Link](https://campus-bridge-five.vercel.app/)
 
 ---
 
