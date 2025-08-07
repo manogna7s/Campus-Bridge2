@@ -1,50 +1,33 @@
+// server.js
 const express = require("express");
 const multer = require("multer");
-const mysql = require("mysql2");
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
-
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Database
+const db = require("./backend/db"); // ✅ Using external db file
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Static file serving
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static("public"));
 
-// Ensure uploads directory exists
-if (!fs.existsSync("./uploads")) {
-  fs.mkdirSync("./uploads");
-}
+// Ensure uploads dir
+if (!fs.existsSync("./uploads")) fs.mkdirSync("./uploads");
 
-// Multer storage
+// Multer config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
 const upload = multer({ storage });
-
-// MySQL setup
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME
-});
-
-db.connect(err => {
-  if (err) {
-    console.error("❌ MySQL connection failed:", err);
-    process.exit(1);
-  }
-  console.log("✅ Connected to MySQL");
-});
 
 // Upload endpoint
 app.post("/upload", upload.array("file", 10), (req, res) => {
@@ -64,7 +47,7 @@ app.post("/upload", upload.array("file", 10), (req, res) => {
   });
 });
 
-// Get resources
+// Fetch resources
 app.get("/resources", (req, res) => {
   db.query("SELECT * FROM learning_resources", (err, results) => {
     if (err) return res.status(500).json({ error: "Failed to fetch" });
@@ -72,7 +55,12 @@ app.get("/resources", (req, res) => {
   });
 });
 
-// Start server
+// ✅ You can now place test queries like this if needed
+// db.query('SELECT * FROM your_table', (err, results) => {
+//   if (err) console.error('Query error:', err);
+//   else console.log('Query results:', results);
+// });
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
