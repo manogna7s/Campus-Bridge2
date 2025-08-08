@@ -52,24 +52,8 @@
 </section>
 
   </div>
-   <script>
-fetch("lectures.json")
-  .then(res => res.json())
-  .then(data => {
-    const section = document.getElementById("lecture-section");
-    section.innerHTML = "";
-    data.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <h3><i class="bi bi-easel"></i> ${item.title}</h3>
-        <a href="${item.file_path}" target="_blank">📄 Open PDF</a>
-      `;
-      section.appendChild(card);
-    });
-  })
-  .catch(err => console.error(err));
-</script>
+  
+
 
 </body>
 </html>
