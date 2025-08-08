@@ -29,54 +29,47 @@
       <h1>Lecture Materials</h1>
     </header>
 
-    <section>
-      <div class="card">
-  <h3><i class="bi bi-easel"></i> Data Structures - Stack</h3>
-      <a href="./uploads/DSA.pdf" target="_blank">📄 Open PDF</a>
-      </div>
+    <section id="lecture-section">
+  <div class="card">
+    <h3><i class="bi bi-easel"></i> Data Structures - Stack</h3>
+    <a href="uploads/DSA.pdf" target="_blank">📄 Open PDF</a>
+  </div>
 
-      <div class="card">
-        <h3><i class="bi bi-easel"></i> Operating Systems - Process Scheduling</h3>
-         <a href="./uploads/OS.pdf" target="_blank">📄 Open PDF</a>
-      </div>
-      <div class="card">
-        <h3><i class="bi bi-easel"></i> Database ManagementSystems</h3>
-         <a href="./uploads/DBMS.pdf" target="_blank">📄 Open PDF</a>
-      </div>
-      <div class="card">
-        <h3><i class="bi bi-easel"></i> Computer Networks - OSI Model</h3>
-        <a href="./uploads/CN.pdf" target="_blank">📄 Open PDF</a>
-      </div>
-     
-    </section>
+  <div class="card">
+    <h3><i class="bi bi-easel"></i> Operating Systems - Process Scheduling</h3>
+    <a href="uploads/OS.pdf" target="_blank">📄 Open PDF</a>
+  </div>
+
+  <div class="card">
+    <h3><i class="bi bi-easel"></i> Database Management Systems</h3>
+    <a href="uploads/DBMS.pdf" target="_blank">📄 Open PDF</a>
+  </div>
+
+  <div class="card">
+    <h3><i class="bi bi-easel"></i> Computer Networks - OSI Model</h3>
+    <a href="uploads/CN.pdf" target="_blank">📄 Open PDF</a>
+  </div>
+</section>
+
   </div>
    <script>
-    fetch("http://localhost:3000/resources")
-      .then(res => res.json())
-      .then(data => {
-        const section = document.getElementById("lecture-section");
+fetch("lectures.json")
+  .then(res => res.json())
+  .then(data => {
+    const section = document.getElementById("lecture-section");
+    section.innerHTML = "";
+    data.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3><i class="bi bi-easel"></i> ${item.title}</h3>
+        <a href="${item.file_path}" target="_blank">📄 Open PDF</a>
+      `;
+      section.appendChild(card);
+    });
+  })
+  .catch(err => console.error(err));
+</script>
 
-        if (!data || data.length === 0) {
-          section.innerHTML = "<p>No lecture materials available.</p>";
-          return;
-        }
-
-        data.forEach(item => {
-          const card = document.createElement("div");
-          card.className = "card";
-
-          const icon = '<i class="bi bi-easel"></i>';
-          const title = <h3>${icon} ${item.title}</h3>;
-          const link = <p><a href="http://localhost:3000/${item.file_path}" target="_blank">📄 Open PDF</a></p>;
-
-          card.innerHTML = title + link;
-          section.appendChild(card);
-        });
-      })
-      .catch(err => {
-        console.error("Error fetching lectures:", err);
-        document.getElementById("lecture-section").innerHTML = "<p>Error loading lecture materials.</p>";
-      });
-  </script>
 </body>
 </html>
