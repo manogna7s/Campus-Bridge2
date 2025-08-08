@@ -28,6 +28,10 @@ app.get('/api/resources/pdfs', (req, res) => {
   res.json(pdfs);
 });
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
