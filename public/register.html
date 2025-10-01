@@ -1,41 +1,178 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <script src="/app.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mentor Registration | Campus Bridge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration – Campus Bridge</title>
   <link rel="stylesheet" href="register.css" />
+  
+  <!-- Google Analytics 4 -->
+  <script src="analytics.js"></script>
 </head>
 <body>
-  <div class="mentor-register-container login-wrapper">
-    <div class="mentor-register-card login-box">
+  <div class="register-wrapper">
+    <div class="register-box">
       <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744446605/logo_fopxgl.svg" alt="Campus Bridge Logo" class="logo" />
-      <h2>Create a Account</h2>
-      <form>
-        <div class="input-wrapper">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" placeholder="Your full name" required />
+      <h2>Create Account</h2>
+      <p class="subtitle">Join Campus Bridge to access exclusive learning resources.</p>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <input type="text" id="name" placeholder="Full Name" required />
+          <div id="name-error" class="error-message"></div>
         </div>
-        <div class="input-wrapper">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="mentor@campusbridge.com" required />
+        
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email Address" required />
+          <div id="email-error" class="error-message"></div>
         </div>
-        <div class="input-wrapper">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Create password" required />
+        
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Password" required />
+          <div id="password-error" class="error-message"></div>
         </div>
-        <div class="input-wrapper">
-          <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" placeholder="Confirm password" required />
+        
+        <div class="form-group">
+          <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+          <div id="confirm-password-error" class="error-message"></div>
         </div>
-        <button type="submit" class="mentor-btn">Register</button>
-        <div class="mentor-links">
-          <a href="mentor-login.html">Already have an account? Login</a>
-        </div>
+        
+        <div id="register-error" class="error-message"></div>
+        <div id="register-success" class="success-message"></div>
+        <div id="register-info" class="info-message"></div>
+        
+        <button type="submit" id="register-btn">Register</button>
       </form>
+
+      <div class="links">
+        <a href="studentlogin.html">Already have an account? Login</a>
+      </div>
+      
+      <div class="troubleshooting-link">
+        <a href="/auth-troubleshooting.html">Having trouble registering?</a>
+      </div>
+      
+      <div class="troubleshooting-link">
+        <a href="/get-verification.html">Didn't receive verification email?</a>
+      </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      
+      // Get form elements
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      const registerBtn = document.getElementById('register-btn');
+      const registerError = document.getElementById('register-error');
+      const registerSuccess = document.getElementById('register-success');
+      const registerInfo = document.getElementById('register-info');
+      
+      // Reset errors and success messages
+      registerError.style.display = 'none';
+      registerSuccess.style.display = 'none';
+      registerInfo.style.display = 'none';
+      
+      // Track registration attempt
+      trackAuthEvent('register_attempt', 'Student Registration Attempt');
+      
+      // Simple validation
+      if (!name) {
+        showError('name-error', 'Name is required');
+        return;
+      }
+      
+      if (!email) {
+        showError('email-error', 'Email is required');
+        return;
+      }
+      
+      if (!password) {
+        showError('password-error', 'Password is required');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        showError('confirm-password-error', 'Passwords do not match');
+        return;
+      }
+      
+      // Disable button and show loading state
+      registerBtn.disabled = true;
+      registerBtn.textContent = 'Registering...';
+      
+      // Send registration request to backend
+      fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Track successful registration
+          trackAuthEvent('register_success', 'Student Registration Success');
+          
+          // Show success message
+          registerSuccess.textContent = "🎉 Registration successful! Please check your email for verification.";
+          registerSuccess.style.display = 'block';
+          
+          // Reset form
+          document.getElementById('registerForm').reset();
+        } else {
+          // Track failed registration
+          trackAuthEvent('register_failed', 'Student Registration Failed: ' + data.message);
+          
+          // Show error message
+          registerError.textContent = data.message;
+          registerError.style.display = 'block';
+        }
+        
+        // Re-enable button
+        registerBtn.disabled = false;
+        registerBtn.textContent = 'Register';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Track error
+        trackAuthEvent('register_error', 'Student Registration Error: ' + error.message);
+        
+        // Show error message
+        registerError.textContent = 'An error occurred. Please try again.';
+        registerError.style.display = 'block';
+        
+        // Re-enable button
+        registerBtn.disabled = false;
+        registerBtn.textContent = 'Register';
+      });
+    });
+    
+    function showError(elementId, message) {
+      const errorElement = document.getElementById(elementId);
+      errorElement.textContent = message;
+      errorElement.style.display = 'block';
+    }
+  </script>
+  
+  <!-- Shakthi Bot Button -->
+  <div id="shakti-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    <img src="https://res.cloudinary.com/dwouk4lee/image/upload/v1744485469/download_iigdmt.jpg" alt="Shakthi Bot" style="width: 60px; height: 60px; border-radius: 50%; cursor: pointer;">
+  </div>
+
+  <!-- Shakthi Bot Chat Widget -->
+  <div id="shakti-chat" style="position: fixed; bottom: 100px; right: 20px; width: 350px; height: 400px; background: white; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 1001;">
+    <div id="shakti-header" style="background: #4e54c8; color: white; padding: 15px; border-radius: 10px 10px 0 0; font-weight: bold;">💬 Shakthi Bot</div>
+    <div id="chat-log" style="flex: 1; padding: 15px; overflow-y: auto; font-size: 14px;"></div>
+    <input type="text" id="user-input" placeholder="Ask me about Campus Bridge..." style="padding: 12px; border: 1px solid #ddd; border-radius: 0 0 10px 10px;">
+  </div>
+
+  <script src="shakti-bot.js"></script>
 </body>
 </html>
