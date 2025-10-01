@@ -101,6 +101,177 @@
     font-weight: bold;
     color: #495057;
   }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 0;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    padding: 20px;
+    background: var(--highlight);
+    color: white;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .close:hover {
+    color: #ccc;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .modal-footer {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 10px 10px;
+    text-align: right;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-primary {
+    background-color: var(--highlight);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #5a3e9e;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+
+  .upload-area:hover {
+    border-color: var(--highlight);
+  }
+
+  .upload-area i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  .upload-area p {
+    margin: 0;
+    color: #6c757d;
+  }
+
+  .file-info {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    display: none;
+  }
+
+  .success-message {
+    text-align: center;
+    padding: 30px;
+    display: none;
+  }
+
+  .success-message i {
+    font-size: 64px;
+    color: #28a745;
+    margin-bottom: 20px;
+  }
+
+  .success-message h3 {
+    color: #28a745;
+    margin-bottom: 10px;
+  }
+
+  .submit-btn {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+  }
+
+  .submit-btn:hover {
+    background-color: #1565c0;
+  }
 </style>
 </head>
 <body>
@@ -146,16 +317,8 @@
           <input type="hidden" name="assignmentTitle" value="Database Management Systems">
           <input type="hidden" name="questionNumber" value="1">
           
-          <div class="file-input-wrapper">
-            <div class="file-input-button">
-              <i class="fas fa-upload"></i> Choose PDF
-            </div>
-            <input type="file" name="assignmentPdf" accept=".pdf" class="file-input" required>
-          </div>
-          <span class="file-name">No file chosen</span>
-          
-          <br>
-          <button type="submit" class="upload-button">Upload Answer</button>
+          <!-- Submit button that opens modal -->
+          <button type="button" class="submit-btn" onclick="openModal(1)">Submit Your Answer</button>
         </form>
         <div class="upload-message"></div>
       </div>
@@ -173,16 +336,8 @@
           <input type="hidden" name="assignmentTitle" value="Database Management Systems">
           <input type="hidden" name="questionNumber" value="2">
           
-          <div class="file-input-wrapper">
-            <div class="file-input-button">
-              <i class="fas fa-upload"></i> Choose PDF
-            </div>
-            <input type="file" name="assignmentPdf" accept=".pdf" class="file-input" required>
-          </div>
-          <span class="file-name">No file chosen</span>
-          
-          <br>
-          <button type="submit" class="upload-button">Upload Answer</button>
+          <!-- Submit button that opens modal -->
+          <button type="button" class="submit-btn" onclick="openModal(2)">Submit Your Answer</button>
         </form>
         <div class="upload-message"></div>
       </div>
@@ -203,16 +358,8 @@
           <input type="hidden" name="assignmentTitle" value="Database Management Systems">
           <input type="hidden" name="questionNumber" value="3">
           
-          <div class="file-input-wrapper">
-            <div class="file-input-button">
-              <i class="fas fa-upload"></i> Choose PDF
-            </div>
-            <input type="file" name="assignmentPdf" accept=".pdf" class="file-input" required>
-          </div>
-          <span class="file-name">No file chosen</span>
-          
-          <br>
-          <button type="submit" class="upload-button">Upload Answer</button>
+          <!-- Submit button that opens modal -->
+          <button type="button" class="submit-btn" onclick="openModal(3)">Submit Your Answer</button>
         </form>
         <div class="upload-message"></div>
       </div>
@@ -220,87 +367,131 @@
   </section>
 </div>
 
-<script>
-// Add file selection handling
-document.querySelectorAll('.file-input').forEach(input => {
-  input.addEventListener('change', function() {
-    const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
-    const fileNameSpan = this.closest('.upload-section').querySelector('.file-name');
-    const uploadButton = this.closest('.upload-section').querySelector('.upload-button');
-    
-    fileNameSpan.textContent = fileName;
-    // Enable button only if both file and student name are provided
-    const studentName = this.closest('.upload-form').querySelector('input[name="studentName"]').value;
-    uploadButton.disabled = !(this.files[0] && studentName);
-  });
-});
-
-// Add student name input handling
-document.querySelectorAll('input[name="studentName"]').forEach(input => {
-  input.addEventListener('input', function() {
-    const uploadButton = this.closest('.upload-form').querySelector('.upload-button');
-    const fileInput = this.closest('.upload-form').querySelector('.file-input');
-    // Enable button only if both file and student name are provided
-    uploadButton.disabled = !(this.value && fileInput.files[0]);
-  });
-});
-
-// Add form submission handling
-document.querySelectorAll('.upload-form').forEach(form => {
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Validate student name
-    const studentNameInput = this.querySelector('input[name="studentName"]');
-    if (!studentNameInput.value.trim()) {
-      const messageDiv = this.querySelector('.upload-message');
-      messageDiv.className = 'upload-message upload-error';
-      messageDiv.textContent = 'Please enter your name';
-      messageDiv.style.display = 'block';
-      return;
-    }
-    
-    const formData = new FormData(this);
-    const uploadButton = this.querySelector('.upload-button');
-    const messageDiv = this.querySelector('.upload-message');
-    
-    // Disable button during upload
-    uploadButton.disabled = true;
-    uploadButton.textContent = 'Uploading...';
-    
-    // Send the request
-    fetch('/api/upload/assignment', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        messageDiv.className = 'upload-message upload-success';
-        messageDiv.textContent = data.message || 'Assignment uploaded successfully!';
-        messageDiv.style.display = 'block';
+<!-- Modal Dialog -->
+<div id="uploadModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Submit Assignment</h2>
+      <span class="close" onclick="closeModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <form id="modalUploadForm">
+        <input type="hidden" id="modalQuestionNumber" name="questionNumber">
+        <input type="hidden" name="assignmentTitle" value="Database Management Systems">
         
-        // Reset form
-        this.reset();
-        this.querySelector('.file-name').textContent = 'No file chosen';
-      } else {
-        messageDiv.className = 'upload-message upload-error';
-        messageDiv.textContent = data.message || 'Upload failed';
-        messageDiv.style.display = 'block';
-      }
-    })
-    .catch(error => {
-      messageDiv.className = 'upload-message upload-error';
-      messageDiv.textContent = 'Upload failed: ' + error.message;
-      messageDiv.style.display = 'block';
-    })
-    .finally(() => {
-      // Re-enable button
-      uploadButton.disabled = false;
-      uploadButton.textContent = 'Upload Answer';
-    });
+        <label for="modalStudentName">Your Name:</label>
+        <input type="text" id="modalStudentName" name="studentName" placeholder="Enter your name" required>
+        
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('modalFileInput').click()">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click to upload PDF file</p>
+          <p class="small">or drag and drop file here</p>
+        </div>
+        
+        <input type="file" id="modalFileInput" name="assignmentPdf" accept=".pdf" style="display: none;" onchange="handleFileSelect(event)">
+        
+        <div class="file-info" id="fileInfo">
+          <strong>Selected file:</strong> <span id="fileName"></span>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+          <i class="fas fa-check-circle"></i>
+          <h3>Assignment Submitted Successfully!</h3>
+          <p>Your PDF file has been uploaded and submitted.</p>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button type="button" class="btn btn-primary" id="submitBtn" onclick="submitAssignment()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Modal functions
+function openModal(questionNumber) {
+  document.getElementById('modalQuestionNumber').value = questionNumber;
+  document.getElementById('uploadModal').style.display = 'block';
+  document.getElementById('successMessage').style.display = 'none';
+  document.getElementById('fileInfo').style.display = 'none';
+  document.getElementById('submitBtn').style.display = 'inline-block';
+  document.getElementById('modalUploadForm').reset();
+  // Reset file input
+  document.getElementById('modalFileInput').value = '';
+}
+
+function closeModal() {
+  document.getElementById('uploadModal').style.display = 'none';
+}
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  if (file) {
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileInfo').style.display = 'block';
+  }
+}
+
+function submitAssignment() {
+  const form = document.getElementById('modalUploadForm');
+  const formData = new FormData(form);
+  
+  // Validate form
+  const studentName = document.getElementById('modalStudentName').value;
+  const fileInput = document.getElementById('modalFileInput');
+  
+  if (!studentName.trim()) {
+    alert('Please enter your name');
+    return;
+  }
+  
+  if (!fileInput.files[0]) {
+    alert('Please select a PDF file');
+    return;
+  }
+  
+  // Disable submit button during upload
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+  
+  // Send the request
+  fetch('/api/upload/assignment', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Show success message
+      document.getElementById('successMessage').style.display = 'block';
+      document.getElementById('submitBtn').style.display = 'none';
+      
+      // Reset form after a delay
+      setTimeout(() => {
+        closeModal();
+      }, 2000);
+    } else {
+      alert('Submission failed: ' + data.message);
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  })
+  .catch(error => {
+    alert('Submission failed: ' + error.message);
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit';
   });
-});
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+  const modal = document.getElementById('uploadModal');
+  if (event.target == modal) {
+    closeModal();
+  }
+}
 </script>
 
     <!-- Shakthi Bot Button -->

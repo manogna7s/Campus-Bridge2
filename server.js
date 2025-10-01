@@ -925,23 +925,34 @@ app.post('/api/upload/assignment', upload.single('assignmentPdf'), (req, res) =>
     });
   }
   
-  // In a real application, you would save this information to a database
-  console.log('Assignment uploaded successfully:', {
-    studentName,
-    assignmentTitle,
-    questionNumber,
-    filename: req.file.filename,
-    path: req.file.path
-  });
-  
-  return res.json({ 
-    success: true, 
-    message: 'Assignment uploaded successfully!',
-    file: {
-      filename: req.file.filename,
-      path: '/uploads/' + req.file.filename
+  // Save assignment submission to MySQL database
+  const db = require('./db');
+  const insertQuery = `INSERT INTO assignments (student_name, assignment_title, question_number, file_path) VALUES (?, ?, ?, ?)`;
+  db.query(
+    insertQuery,
+    [studentName, assignmentTitle, questionNumber, '/uploads/' + req.file.filename],
+    (err, result) => {
+      if (err) {
+        console.error('Error saving assignment to DB:', err);
+        return res.status(500).json({ success: false, message: 'Database error. Please try again.' });
+      }
+      console.log('Assignment uploaded and saved to DB:', {
+        studentName,
+        assignmentTitle,
+        questionNumber,
+        filename: req.file.filename,
+        path: req.file.path
+      });
+      return res.json({ 
+        success: true, 
+        message: 'Assignment uploaded and saved!',
+        file: {
+          filename: req.file.filename,
+          path: '/uploads/' + req.file.filename
+        }
+      });
     }
-  });
+  );
 });
 
 // Catch-all for SPA/frontend routes - This should be LAST
