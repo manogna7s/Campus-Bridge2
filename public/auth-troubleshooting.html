@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Troubleshooting - Campus Bridge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            font-size: 22px;
+        }
+        
+        p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .error-message {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+            margin: 15px 0;
+        }
+        
+        .success-message {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+            margin: 15px 0;
+        }
+        
+        .code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn.secondary {
+            background: #95a5a6;
+        }
+        
+        .contact {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #95a5a6;
+            text-align: center;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Authentication Troubleshooting</h1>
+        <p>If you're experiencing "Internal Server Error" when trying to register or login, follow these steps to diagnose and fix the issue.</p>
+        
+        <div class="step">
+            <h2><span class="step-number">1</span> Check Database Connection</h2>
+            <p>First, verify that your database is properly connected:</p>
+            <ul>
+                <li>Visit the <a href="/db-status.html">Database Status Page</a></li>
+                <li>Click "Check Connection" to test database connectivity</li>
+                <li>If it fails, check your environment variables in Render</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">2</span> Verify Environment Variables</h2>
+            <p>Ensure these environment variables are set in your Render dashboard:</p>
+            <div class="code">
+MYSQL_HOST=your-database-host<br>
+MYSQL_PORT=3306<br>
+MYSQL_USER=your-database-username<br>
+MYSQL_PASSWORD=your-database-password<br>
+MYSQL_DATABASE=lms
+            </div>
+            <p>For email functionality (optional but recommended):</p>
+            <div class="code">
+EMAIL_SERVICE=gmail<br>
+EMAIL_USER=your-email@gmail.com<br>
+EMAIL_PASS=your-app-password<br>
+EMAIL_FROM=your-email@gmail.com<br>
+APP_URL=https://your-app-name.onrender.com
+            </div>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">3</span> Check Database Tables</h2>
+            <p>Ensure the required tables exist in your database:</p>
+            <div class="code">
+CREATE TABLE IF NOT EXISTS learning_resources (<br>
+&nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+&nbsp;&nbsp;title VARCHAR(255) NOT NULL,<br>
+&nbsp;&nbsp;file_path VARCHAR(255) NOT NULL<br>
+);<br><br>
+
+CREATE TABLE IF NOT EXISTS users (<br>
+&nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+&nbsp;&nbsp;name VARCHAR(255) NOT NULL,<br>
+&nbsp;&nbsp;email VARCHAR(255) UNIQUE NOT NULL,<br>
+&nbsp;&nbsp;password VARCHAR(255) NOT NULL,<br>
+&nbsp;&nbsp;is_verified TINYINT(1) DEFAULT 0,<br>
+&nbsp;&nbsp;created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP<br>
+);
+            </div>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">4</span> Check Render Logs</h2>
+            <p>Examine the application logs for detailed error information:</p>
+            <ol>
+                <li>Go to your Render dashboard</li>
+                <li>Navigate to your web service</li>
+                <li>Click on the "Logs" tab</li>
+                <li>Look for error messages when you try to register or login</li>
+            </ol>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">5</span> Common Error Solutions</h2>
+            
+            <div class="error-message">
+                <strong>ER_ACCESS_DENIED_ERROR</strong><br>
+                Your database username or password is incorrect. Double-check your environment variables.
+            </div>
+            
+            <div class="error-message">
+                <strong>ENOTFOUND</strong><br>
+                Your database host is incorrect or not accessible. Verify your database connection details.
+            </div>
+            
+            <div class="error-message">
+                <strong>ER_BAD_DB_ERROR</strong><br>
+                Your database name is incorrect. Make sure MYSQL_DATABASE is set to "lms".
+            </div>
+            
+            <div class="success-message">
+                <strong>TIP:</strong> If you don't need email verification during development, you can temporarily remove the is_verified check in the login endpoint by modifying the query to:<br>
+                <code>SELECT * FROM users WHERE email = ? AND password = ?</code>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/db-status.html" class="btn">Check Database Status</a>
+            <a href="/studentlogin.html" class="btn secondary">Try Login Again</a>
+            <a href="/" class="btn secondary">Return to Homepage</a>
+        </div>
+        
+        <div class="contact">
+            For additional support, contact: connect@campusbridge.io
+        </div>
+    </div>
+</body>
+</html>

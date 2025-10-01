@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Status - Campus Bridge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .success {
+            color: #4CAF50;
+        }
+        
+        .error {
+            color: #f44336;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            border-left: 4px solid #667eea;
+        }
+        
+        .status-card.success {
+            border-left-color: #4CAF50;
+        }
+        
+        .status-card.error {
+            border-left-color: #f44336;
+        }
+        
+        .status-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .status-details {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn.secondary {
+            background: #95a5a6;
+        }
+        
+        .btn.success {
+            background: #4CAF50;
+        }
+        
+        .btn.warning {
+            background: #ff9800;
+        }
+        
+        .loading {
+            display: none;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .contact {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #95a5a6;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon success">📊</div>
+        <h1>Database Status</h1>
+        <p>Check the connection status and details of your Campus Bridge database.</p>
+        
+        <div class="status-card" id="connectionStatus">
+            <div class="status-title">Connection Status</div>
+            <div class="status-details" id="connectionDetails">
+                Click "Check Connection" to test database connectivity
+            </div>
+        </div>
+        
+        <div class="status-card hidden" id="tablesStatus">
+            <div class="status-title">Database Tables</div>
+            <div class="status-details" id="tablesDetails">
+                Loading...
+            </div>
+        </div>
+        
+        <div class="status-card hidden" id="usersStatus">
+            <div class="status-title">Users Information</div>
+            <div class="status-details" id="usersDetails">
+                Loading...
+            </div>
+        </div>
+        
+        <button class="btn" onclick="checkConnection()">
+            <span class="loading" id="connectionLoading"><span class="spinner"></span>Checking...</span>
+            <span class="normal" id="connectionNormal">Check Connection</span>
+        </button>
+        
+        <button class="btn secondary hidden" onclick="checkTables()" id="checkTablesBtn">
+            <span class="loading" id="tablesLoading"><span class="spinner"></span>Checking Tables...</span>
+            <span class="normal" id="tablesNormal">Check Tables</span>
+        </button>
+        
+        <button class="btn secondary hidden" onclick="checkUsers()" id="checkUsersBtn">
+            <span class="loading" id="usersLoading"><span class="spinner"></span>Checking Users...</span>
+            <span class="normal" id="usersNormal">Check Users</span>
+        </button>
+        
+        <div style="margin-top: 20px;">
+            <a href="/" class="btn secondary">Return to Homepage</a>
+        </div>
+        
+        <div class="contact">
+            For support, contact: connect@campusbridge.io
+        </div>
+    </div>
+
+    <script>
+        function showLoading(type) {
+            document.getElementById(type + 'Loading').style.display = 'inline';
+            document.getElementById(type + 'Normal').style.display = 'none';
+        }
+        
+        function hideLoading(type) {
+            document.getElementById(type + 'Loading').style.display = 'none';
+            document.getElementById(type + 'Normal').style.display = 'inline';
+        }
+        
+        function showElement(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        
+        function hideElement(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+        
+        function checkConnection() {
+            showLoading('connection');
+            
+            fetch('/api/db/status')
+                .then(response => response.json())
+                .then(data => {
+                    hideLoading('connection');
+                    
+                    const statusCard = document.getElementById('connectionStatus');
+                    const details = document.getElementById('connectionDetails');
+                    
+                    if (data.success) {
+                        statusCard.className = 'status-card success';
+                        details.innerHTML = `
+                            <strong>✅ Connected Successfully</strong><br>
+                            Message: ${data.message}<br>
+                            Result: ${JSON.stringify(data.result)}<br><br>
+                            <small>You can now check database tables and user information.</small>
+                        `;
+                        showElement('checkTablesBtn');
+                        showElement('checkUsersBtn');
+                    } else {
+                        statusCard.className = 'status-card error';
+                        details.innerHTML = `
+                            <strong>❌ Connection Failed</strong><br>
+                            Message: ${data.message}<br>
+                            Error: ${data.error || 'Unknown error'}
+                            ${data.debug ? `<br><br><strong>Debug Info:</strong><br>
+                            Host: ${data.debug.host}<br>
+                            Port: ${data.debug.port}<br>
+                            User: ${data.debug.user}<br>
+                            Database: ${data.debug.database}` : ''}
+                        `;
+                        hideElement('checkTablesBtn');
+                        hideElement('checkUsersBtn');
+                        hideElement('tablesStatus');
+                        hideElement('usersStatus');
+                    }
+                })
+                .catch(error => {
+                    hideLoading('connection');
+                    const statusCard = document.getElementById('connectionStatus');
+                    const details = document.getElementById('connectionDetails');
+                    statusCard.className = 'status-card error';
+                    details.innerHTML = `
+                        <strong>❌ Connection Failed</strong><br>
+                        Error: ${error.message}
+                    `;
+                    hideElement('checkTablesBtn');
+                    hideElement('checkUsersBtn');
+                    hideElement('tablesStatus');
+                    hideElement('usersStatus');
+                });
+        }
+        
+        function checkTables() {
+            showLoading('tables');
+            showElement('tablesStatus');
+            
+            fetch('/api/db/tables')
+                .then(response => response.json())
+                .then(data => {
+                    hideLoading('tables');
+                    
+                    const statusCard = document.getElementById('tablesStatus');
+                    const details = document.getElementById('tablesDetails');
+                    
+                    if (data.success) {
+                        statusCard.className = 'status-card success';
+                        let tablesHtml = '<strong>✅ Database Tables:</strong><br>';
+                        if (data.tables && data.tables.length > 0) {
+                            data.tables.forEach(table => {
+                                tablesHtml += `- ${Object.values(table)[0]}<br>`;
+                            });
+                        } else {
+                            tablesHtml += 'No tables found';
+                        }
+                        details.innerHTML = tablesHtml;
+                    } else {
+                        statusCard.className = 'status-card error';
+                        details.innerHTML = `
+                            <strong>❌ Failed to Get Tables</strong><br>
+                            Message: ${data.message}<br>
+                            Error: ${data.error || 'Unknown error'}
+                        `;
+                    }
+                })
+                .catch(error => {
+                    hideLoading('tables');
+                    const statusCard = document.getElementById('tablesStatus');
+                    const details = document.getElementById('tablesDetails');
+                    statusCard.className = 'status-card error';
+                    details.innerHTML = `
+                        <strong>❌ Failed to Get Tables</strong><br>
+                        Error: ${error.message}
+                    `;
+                });
+        }
+        
+        function checkUsers() {
+            showLoading('users');
+            showElement('usersStatus');
+            
+            fetch('/api/db/users/count')
+                .then(response => response.json())
+                .then(data => {
+                    hideLoading('users');
+                    
+                    const statusCard = document.getElementById('usersStatus');
+                    const details = document.getElementById('usersDetails');
+                    
+                    if (data.success) {
+                        statusCard.className = 'status-card success';
+                        details.innerHTML = `
+                            <strong>✅ Users Table Accessible</strong><br>
+                            Total Users: ${data.count}
+                        `;
+                    } else {
+                        statusCard.className = 'status-card error';
+                        details.innerHTML = `
+                            <strong>❌ Failed to Access Users</strong><br>
+                            Message: ${data.message}<br>
+                            Error: ${data.error || 'Unknown error'}
+                        `;
+                    }
+                })
+                .catch(error => {
+                    hideLoading('users');
+                    const statusCard = document.getElementById('usersStatus');
+                    const details = document.getElementById('usersDetails');
+                    statusCard.className = 'status-card error';
+                    details.innerHTML = `
+                        <strong>❌ Failed to Access Users</strong><br>
+                        Error: ${error.message}
+                    `;
+                });
+        }
+    </script>
+</body>
+</html>
